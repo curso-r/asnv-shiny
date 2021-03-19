@@ -1,0 +1,13 @@
+name: my-first-dashboard-with-shiny-csds2019
+title: my-first-dashboard-with-shiny-csds2019
+username:
+account: rseis
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1490536
+bundleId: 2599022
+url: https://rseis.shinyapps.io/my-first-dashboard-with-shiny-csds2019/
+when: 1574118539.88134
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: 01_kmeans_app_example.R|02_hello_world.html|02_hello_world.R|03_hist.R|04_gridsystem.R|05_tabsetpanel.R|06_navbarpage.R|07_pagewithsidebar.R|08_shinydashboard.R|data.csv|html_example.html|docs
