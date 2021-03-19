@@ -7,7 +7,7 @@ quadrado <- function(text = "") {
 
 
 ui <- navbarPage(
-  title = "My Navbar Page!",
+  title = "Minha página Navbar!",
   tabPanel("tab 1", quadrado("OLA")),
   tabPanel("tab 2", quadrado("HELLO")),
   tabPanel("tab 3", quadrado("HOLLA")),

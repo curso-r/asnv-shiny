@@ -7,14 +7,14 @@ ui <- ui <- fluidPage(
   sidebarLayout(
     
     sidebarPanel(
-      sliderInput("num", "Sample size: ", 0, 1000, 500)
+      sliderInput("num", "Tamanho da amostra: ", 0, 1000, 500)
     ),
     
     mainPanel(
       tabsetPanel(
-        tabPanel("Plot", plotOutput("plot")), 
-        tabPanel("Summary", verbatimTextOutput("summary")), 
-        tabPanel("Table", tableOutput("table"))
+        tabPanel("Gráfico", plotOutput("grafico")), 
+        tabPanel("Sumário", verbatimTextOutput("sumario")), 
+        tabPanel("Tabela", tableOutput("tabela"))
       )
     )
   )
@@ -22,20 +22,20 @@ ui <- ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  data <- reactive({
+  dados <- reactive({
     rnorm(input$num)
   })
   
-  output$plot <- renderPlot({
-    hist(data())
+  output$grafico <- renderPlot({
+    hist(dados())
   })
   
-  output$summary <- renderPrint({
-    summary(data())
+  output$sumario <- renderPrint({
+    summary(dados())
   })
   
   output$table <- renderTable({
-    data()
+    dados()
   })
 }
 
