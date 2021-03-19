@@ -5,43 +5,43 @@ ui <- fluidPage(
   
   sliderInput(
     inputId = "num",
-    label = "Number of observations: ",
+    label = "Número de observações: ",
     min = 1,
     max = 100,
     value = 20,
   ),
   
-  textInput("title", "Title of the Histogram: "),
-  actionButton("update", "Update!"),
+  textInput("titulo", "Título do Histograma: "),
+  actionButton("atualizar", "atualizar!"),
   
   plotOutput("hist"),
-  verbatimTextOutput("summary"),
-  actionButton("write_data", "Write Data as CSV")
+  verbatimTextOutput("sumario"),
+  actionButton("salvar_dados", "salvar dados as CSV")
 )
 
 server <- function(input, output, session) {
   
-  data <- eventReactive(input$update, {
+  dados <- eventReactive(input$atualizar, {
     rnorm(input$num)
   })
   
   output$hist <- renderPlot({
-    title <- isolate(input$title)
-    hist(data(), main = title)
+    titulo <- isolate(input$titulo)
+    hist(dados(), main = titulo)
   })
   
-  output$summary <- renderPrint({
-    summary(data())
+  output$sumario <- renderPrint({
+    summary(dados())
   })
   
-  observeEvent(input$write_data, {
-    write.csv(data(), "data.csv")
-    cat("done!\n")
+  observeEvent(input$salvar_dados, {
+    write.csv(dados(), "dados.csv")
+    cat("Salvo!\n")
   })
   
   observe({
-    print(data())
-    print(as.numeric(input$write_data))
+    print(dados())
+    print(as.numeric(input$salvar_dados))
   })
 }
 

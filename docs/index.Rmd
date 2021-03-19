@@ -1,5 +1,5 @@
 ---
-title: "My First Dashboard With Shiny"
+title: "Meu Primeiro Dashboard Com Shiny"
 author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '70%'>"
 date: "`r Sys.Date()`"
 output:
@@ -20,52 +20,30 @@ library(tidyverse)
 options(htmltools.dir.version = FALSE)
 ```
 
+
 class: middle
 
-## Requirements
+## Neste curso vamos aprender
 
-### - R v3.5.0 or superior
+### 1. Como criar um Aplicativo Web com Shiny
 
-### - RStudio v1.2.0 or superior
-
-### - Previous programming experience with R
-
-### - Files [Click Here to Download](https://github.com/curso-r/my-first-dashboard-with-shiny-csds2019/archive/master.zip)
-
----
-class: middle, center
-
-<img src="img/cursor.png">
-
-## [curso-r.com](http://curso-r.com)
-
-## Athos Petri Damiani 
-
-
----
-class: middle
-
-## In this course, we are going to learn
-
-### 1. How to build a Shiny App
-
-### 2. Reactivity
+### 2. Reatividade (Reactivity)
 
 ### 3. Layouts (shinydashboard)
 
-### 4. Deploy with Shinyapps.io (if we got time!)
+### 4. Disponibilizar no Shinyapps.io
 
 <img src="img/hex-shiny.png" style="position: fixed; top: 250px; right: 75px; z-index: 1;" width="15%">
 
 ---
 class: middle
 
-## Dynamic Dashboards
+## Dashboards dinâmicos
 
 <img src="img/como-funciona.png">
 
 .footnote[
-source: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
+fonte: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
 ]
 
 ---
@@ -77,7 +55,7 @@ class: middle, center
 
 <img src="img/shiny2.png" width = "50%">
 
-### Motivation:
+### Motivação:
 
 ### [Shiny Gallery](https://shiny.rstudio.com/gallery/)
 
@@ -85,7 +63,7 @@ class: middle, center
 
 ---
 
-## Hello World
+## Olá Mundo
 
 ```{r, echo=TRUE, eval=FALSE}
 library(shiny)
@@ -102,13 +80,13 @@ shinyApp(ui, server)
 ---
 class: middle, center
 
-## To R!
+## Ao R!
 
 <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width = "300" height = "300">
 
 ---
 
-## Inputs and Outputs
+## Inputs e Outputs
 
 
 <img src="img/inputs_outputs.png" width = "500" height = "300">
@@ -120,6 +98,7 @@ ui <- fluidPage(
 )
 ```
 
+
 ---
 
 ## Inputs 
@@ -127,7 +106,7 @@ ui <- fluidPage(
 <img src="img/inputs.png", width = "100%">
 
 .footnote[
-source: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
+fonte: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
 ]
 
 
@@ -150,13 +129,13 @@ tibble::tribble(~Function, ~Output,
 
 ---
 
-## In the "hello world" example, lets...
+## No exemplo do "hello world" vamos...
 
-1) insert a slider input accepting values from 1 to 100.
+1) inserir um slider input que aceita valores entre 1 e 100.
 
-2) insert a plot output.
+2) Reservar uma área para um gráfico por meio do `plotOutput("hist")`.
 
-3) insert a text input with `inputId = "title"`. (exercise!)
+3) inserir um textInput() com o parâmetro `inputId = "titulo"`. (exercício!)
 
 ---
 
@@ -190,9 +169,9 @@ server <- function(input, output, session) {
 }
 ```
 
---
 
-remember our UI setup...
+
+Lembre-se do nosso UI...
 
 ```{r, echo = TRUE, eval = FALSE}
 ui <- fluidPage(
@@ -248,7 +227,7 @@ output$hist <- renderPlot({
 
 ---
 
-## Reactive Values and Reactive Functions
+## Reactive Values e Reactive Functions
 
 Use input values with **`input$`**
 
@@ -262,24 +241,28 @@ Use input values with **`input$`**
 <img src="img/sliderinputexample.png" width= "80%">
 
 
-- `render*()` are **reactive functions**
+- `render*()` são **reactive functions**
 
-- `input$*` are **reactive values**
+- `input$*` são **reactive values**
 
 
 ]
 
 .footnote[
-source: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
+fonte: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
 ]
 
---
+---
 
-If we put **`input$num`** inside the **`renderPlot()`** in our example, the output would **`react`** if slider were changed by user.
+## Reactive Values e Reactive Functions
+
+Se colocarmos **`input$num`** dentro de uma **`renderPlot()`** no nosso exemplo, o output iria **`reagir`** caso o slider fosse mexido pelo usuário.
 
 ```{r, echo = TRUE, eval = FALSE}
 # server
-hist(rnorm(input$num))
+output$hist <- renderPlot({
+  hist(rnorm(input$num))    
+})
 ```
 
 
@@ -288,17 +271,17 @@ hist(rnorm(input$num))
 
 ## Server
 
-### Recap:
+### Recapitulação:
 
-Inside `server` function,
+Dentro da função `server`,
 
-1) save the output using **`output$hist <-`**
+1) Guarde o output desejado usando **`output$hist <-`**
 
-2) feed the output **`render*()`** function with code
+2) Alimente o output **`renderALGUMACOISA()`** com códigos
 
-3) access **input values** with **`input$*`**
+3) Acesse os **input values** com **`input$ALGUMACOISA`**
 
-4) create reactivity by using  **`input$*`** inside **`render*()`** functions
+4) Crie reactividade usando  **`input$*`** dentro das funções **`renderALGUMACOISA()`**
 
 ```{r, echo = TRUE, eval = FALSE}
 # server
@@ -309,11 +292,13 @@ output$hist <- renderPrint({
 
 ---
 
-## Back to our "hello world" example...
+## Voltando ao nosso exemplo do "hello world"...
 
-3) then, lets make the title of the histogram depending on the text input that you created before. (exercise!)
+3) Vamos fazer o título do histograma de um `textInput("titulo")` + `input$titulo`. (exercício!)
 
-4) finally, create an **`verbatimTextOutput("summary")`** on ui and feed it with **`summary(rnorm(input$num))`** using **`renderPrint({})`** on server. (exercise!)
+4) Agora crie um **`verbatimTextOutput("sumario")`** na parte do ui;
+
+5) Finalmente, na parte do server, coloque **`summary(rnorm(input$num))`** dentro do **`renderPrint({})`**. (exercício!)
 
 ---
 
@@ -323,40 +308,41 @@ class: middle, center, inverse
 
 ---
 
-## Reactivity
+## Reatividade
 
-Reactivity is the relationship between **reactive values** and **reactive functions**: **reactive values** triggers **reactive functions**
+Reatividade é a relação entre **reactive values** e **reactive functions**: **reactive values** acionam **reactive functions**
 
 <img src="img/reactive1.png" width= "100%">
 
 ---
 
-## Reactive Context
+## Contextos de reatividade
 
-Reactive values must be usend in Reactive Context.
+Reactive values **TEM** que ser usados dentro de um **Contexto de reatividade**.
 
-### Right
+### Correto
 
 ```{r, echo=TRUE, eval= FALSE}
 # server
 * output$hist <- renderPlot({hist(rnorm(input$num))})
 ```
 
-### Wrong
+### Errado
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
 output$hist <- hist(rnorm(input$num))
 ```
 
+Códigos dentro do `renderPlot({})`, por exemplo, estarão dentro de um Contexto de Reatividade.
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
-### Main reactive functions in Shiny
+### Principais reactive functions no Shiny
 
-- **`render*({})`**
+- **`renderALGUMACOISA({})`**
 
 - **`reactive({})`**
 
@@ -370,11 +356,11 @@ output$hist <- hist(rnorm(input$num))
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
 ### **`reactive({})`**
 
-Builds a **reactive expression** (behaves like the **`input$*`**!).
+Constrói uma **reactive expression** (se comporta como o **`input$ALGUMACOISA`**!).
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
@@ -383,7 +369,7 @@ data <- reactive({
 })
 ```
 
-Is used like an ordinary function:
+É usada como uma função qualquer (repare nos parênteses `()` na ponta):
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
@@ -394,104 +380,104 @@ output$summary <- renderPrint({
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
 ### **`reactive({})`**
 
 <img src="img/reactive2.png" width= "80%">
 
-1) Exercise: create the data() reactive expression in the 'hello world' example.
+1) Exercício: crie o **reactive expression** data() no  'hello world'.
 
 .footnote[
-source: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
+fonte: [rstudio.com/shiny/](http://www.rstudio.com/shiny/)
 ]
 
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
 ### **`isolate({})`**
 
-Turn an **reactive value** into a **non-reactive value**.
+Desliga a reatividade de um **reactive value**.
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
 output$hist <- renderPlot({
-  * title <- isolate(input$title)
-  hist(data(), main = title)
+  titulo <- isolate(input$titulo)
+  hist(data(), main = titulo)
 })
 ```
 
-Now **`renderPlot({})`** will NOT react if **`input$title`** changes.
+Agora **`renderPlot({})`** NÃO vai reagir se **`input$titulo`** mudar.
 
 
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
 ### **`observeEvent({})`**
 
-Useful to trigger a block of code to run on server whenever a given **`input$*`** changes.
+Útil para acionar um bloco de códigos no server toda vez que um **`input$*`** dentro dele mudar.
 
 ```{r, echo = TRUE, eval=FALSE}
 # ui
-actionButton("write_data", "Write Data as CSV")
+actionButton("salvar_dados", "Salve os dados em CSV")
 ```
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
-observeEvent(input$write_data, {
-  write.csv(data(), "data.csv")
+observeEvent(input$salvar_dados, {
+  write.csv(dados(), "dados.csv")
 })
 ```
 
-PS: action button is just another type of input! Useful along with **`observeEvent()`**. See [Using Action Button](https://shiny.rstudio.com/articles/action-buttons.html) from Shiny docs.
+PS: `actionButton()` é um tipo de input útil com **`observeEvent()`**. Ver [Using Action Button](https://shiny.rstudio.com/articles/action-buttons.html) da documentação oficial do Shiny.
 
-Exercise: put the 'write data' functionality into 'hello world' example.
+Exercício: coloque a funcionalidade 'salvar_dados' no 'hello world'.
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
 ### **`observe({})`**
 
-Also useful to trigger a block of code to run on server, but any **reactive value** inside the code will trigger it.
+Também útil pra acionar bloco de códigos, mas qualquer **reactive value** dentro dele vai acioná-lo.
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
 observe({
-  print(data())
-  print(as.numeric(input$writ_data))
+  print(dados())
+  print(as.numeric(input$salvar_dados))
 })
 ```
 
-
+No exemplo, o código será rodado ou se `dados()` mudar ou se `input$salvar_dados` mudar.
 
 ---
 
-## Reactive Functions
+## Funções reativas
 
 ### **`eventReactive({})`**
 
 
-Create a **reactive value** whenever a specified **`input$*`** changes (or any other **reactive value**).
+Cria um **reactive value** que se mudifica quando qualquer **`input$ALGUMACOISA`** dentro dele mudar.
 
 ```{r, echo = TRUE, eval=FALSE}
 # ui
-actionButton("update", "Update!")
+actionButton("atualizar", "atualizar!")
 ```
 
 ```{r, echo = TRUE, eval=FALSE}
 # server
-data <- eventReactive(input$update, {
-  write.csv(data(), "data.csv")
+data <- eventReactive(input$atualizar, {
+  write.csv(dados(), "dados.csv")
 })
 ```
 
 
-Exercise: put it into 'hello world' example.
+Exercício: coloque esse reactiveEvent dentro do 'hello world'.
 
 
 ---
@@ -504,33 +490,33 @@ class: middle, center, inverse
 
 ---
 
-## But first... HTML Tags
+## Mas antes... Tags de HTML
 
 ```{r, echo = TRUE, eval = FALSE}
 fluidPage(
-  tags$h1("My First Shiny App"),
+  tags$h1("Meu Primeiro Shiny App"),
   tags$p(
-    "The link to the Shiny website is",
+    "",
     tags$a(href = "https://www.rstudio.com/shiny/", "rstudio.com/shiny."),
-    tags$strong("I strongly recommend that you take a look at it!")
+    tags$strong("Recomendo fortemente que dê uma olhada nele!!")
   )
 )
 ```
 
 ```{html}
 <div class="container-fluid">
-  <h1>My First Shiny App</h1>
+  <h1>Meu Primeiro Shiny App</h1>
   <p>
-    The link to the Shiny website is
+    O link para o site do Shiny é
     <a href="https://www.rstudio.com/shiny/">rstudio.com/shiny.</a>
-    <strong>I strongly recommend that you take a look at it!</strong>
+    <strong>Recomendo fortemente que dê uma olhada nele!!</strong>
   </p>
 </div>
 ```
 
 ---
 
-## But first... HTML Tags
+## Mas antes... Tags de HTML
 
 ```{r, echo = TRUE, eval = FALSE}
 names(tags)
@@ -541,28 +527,28 @@ head(names(tags), 45)
 ...
 
 ```{r, echo = TRUE, eval = FALSE}
-tags$h1("My First Shiny App")
+tags$h1("Meu Primeiro Shiny App")
 
-## <h1>My First Shiny App</h1>
+## <h1>Meu Primeiro Shiny App</h1>
 ```
 
 ---
 
-## But first... HTML Tags
+## Mas antes... Tags de HTML
 
-The most commonly used tags are:
+As tags mais comuns são:
 
 ```{r, echo = FALSE, eval=TRUE}
 tibble::tribble(~`R function`, ~`HTML`,
-                "a()", "a hyperlink",
-                "hr()", "horizontal line",
-                "br()", "line break",
-                "code()", "monospaced code styled text",
-                "h1(), ..., h6()", "headers",
-                "img()", "image",
-                "p()", "paragraph",
-                "em()", "italic text",
-                "strong()", "bold text") %>% knitr::kable(format = "html")
+                "a()", "um hyperlink",
+                "hr()", "linha horizontal",
+                "br()", "quebra de linha",
+                "code()", "texto com estilo monoespaçado",
+                "h1(), ..., h6()", "cabeçalhos",
+                "img()", "imagem",
+                "p()", "parágrafo",
+                "em()", "texto em itálico",
+                "strong()", "texto em negrito") %>% knitr::kable(format = "html")
 ```
 
 ---
@@ -571,22 +557,22 @@ tibble::tribble(~`R function`, ~`HTML`,
 
 <img src="img/gridsystem.jpg">
 
-- Each row is a **`fluidRow()`**.
-- **`columns`** are divided up to 12 parts. The **`width`** determines how many parts wide are the column.
+- Cada linha é um **`fluidRow()`**.
+- **`columns`** são divididas em 12 partes iguais. O **`width`** determina quantas partes de largura a coluna vai ter.
 
 .footnote[
-source: [dzone.com/articles/working-with-bootstrap-4-grid-system-for-creating](https://dzone.com/articles/working-with-bootstrap-4-grid-system-for-creating)
+fonte: [dzone.com/articles/working-with-bootstrap-4-grid-system-for-creating](https://dzone.com/articles/working-with-bootstrap-4-grid-system-for-creating)
 ]
 
 --
 
-Grid System comes from Twitter's Open-source [Bootstrap Framework](https://getbootstrap.com.br/docs/4.1/getting-started/introduction/).
+Grid System vem do [Bootstrap Framework](https://getbootstrap.com.br/docs/4.1/getting-started/introduction/) do Twitter.
 
 ---
 
 ## Grid System
 
-Two main layout functions
+Duas principais funções de layout
 
 ```{r, echo=TRUE, eval = FALSE}
 fluidRow()
@@ -604,14 +590,14 @@ cat(as.character(column(2)))
 
 ---
 
-## tabPanels and tabsetPanels
+## tabPanels e tabsetPanels
 
 ```{r, echo = TRUE,eval=FALSE}
 # ui
 tabsetPanel(
-  tabPanel("Plot", plotOutput("plot")), 
-  tabPanel("Summary", verbatimTextOutput("summary")), 
-  tabPanel("Table", tableOutput("table"))
+  tabPanel("Gráfico", plotOutput("grafico")), 
+  tabPanel("Sumário", verbatimTextOutput("sumario")), 
+  tabPanel("Tabela", tableOutput("tabela"))
 )
 ```
 
@@ -623,14 +609,14 @@ tabsetPanel(
 
 ```{r, echo = TRUE, eval = FALSE}
 pageWithSidebar(
-  headerPanel = headerPanel("Hello Shiny!"),
+  headerPanel = headerPanel("Olá Shiny!"),
   
   sidebarPanel(
-    sliderInput("n", "Sample size:", min= 0, max=150, value=50)
+    sliderInput("n", "Tamanho da amostra:", min= 0, max=150, value=50)
   ),
   
   mainPanel(
-    plotOutput("iris_plot")
+    plotOutput("grafico_do_iris")
   )
 )
 ```
@@ -643,7 +629,7 @@ pageWithSidebar(
 
 
 ```{r, echo=TRUE,eval=FALSE}
-navbarPage(title = "My Navbar Page",
+navbarPage(title = "Meu Site Navbar",
            tabPanel("a"),
            tabPanel("b"),
            tabPanel("c"),
@@ -664,13 +650,13 @@ output:
 
 
 .footnote[
-source: [db.rstudio.com/dashboards/](https://db.rstudio.com/best-practices/dashboards/)
+fonte: [db.rstudio.com/dashboards/](https://db.rstudio.com/best-practices/dashboards/)
 ]
 ---
 
 ## shinydashboard Layout
 
-### The template
+### O template
 
 .pull-left[
 
@@ -702,7 +688,7 @@ ui <- dashboardPage(
 
 ```{r, eval=FALSE}
 box(
-  title = "Histogram", ...
+  title = "Histograma", ...
 ),
 box(
   title = "Inputs", ...
@@ -719,7 +705,7 @@ box(
 
 ```{r, eval=FALSE}
 tabBox(
-  title = "Densities",
+  title = "Densidades",
   tabPanel("Sepal.Length",..),
   tabPanel("Sepal.Width",...),
   tabPanel("Petal.Length",..),
@@ -809,17 +795,17 @@ dashboardBody(
 
 ---
 
-## Exercise 1
+## Exercício 1 (dificuldade média)
 
-Replicate the "Calculator" page of [this dashboard (click me!)](https://rseis.shinyapps.io/my-first-dashboard-with-shiny-csds2019/).
+Reproduza a aba "Calculator" [desse dashboard (clique aqui!)](https://rseis.shinyapps.io/asnv-shiny/).
 
 <img src="img/dashtutorial.png">
 
 ---
 
-## Exercise 2 (hard!)
+## Exercício 2 (difícil!)
 
-Replicate the "Descriptive" page of [this dashboard (click me!)](https://rseis.shinyapps.io/my-first-dashboard-with-shiny-csds2019/).
+Reproduza a aba "Descriptive" [deste dashboard (clique  aqui!)](https://rseis.shinyapps.io/asnv-shiny/).
 
 <img src="img/dashtutorial2.png">
 
@@ -835,24 +821,12 @@ class: middle, center
 
 ## Shinyapps.io
 
-### To R!
+### Ao R!
 
 <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width = "300" height = "300">
 
 ---
 
-## Reference
+## Referência
 
-This course is based on [Garrett Grolemund's Shiny Tutorial](https://shiny.rstudio.com/tutorial/).
-
----
-
-class: middle, center, inverse
-
-# Thank you!
-
-<a href = "http://curso-r.com">
-<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '20%'>
-</a>
-
-## athos.damiani@curso-r.com
+Este curso é baseado no [Garrett Grolemund's Shiny Tutorial](https://shiny.rstudio.com/tutorial/).

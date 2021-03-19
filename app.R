@@ -1,13 +1,11 @@
 library(shiny)
 library(shinydashboard)
 library(randomForest)
-library(xgboost)
 library(caret)
 library(tidyverse)
 
 lm_iris <- readRDS("lm_iris.rds")
 rf_iris <- readRDS("rf_iris.rds")
-xgb_iris <- readRDS("xgb_iris.rds")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Iris Predictor"),
@@ -25,9 +23,8 @@ ui <- dashboardPage(
         tabName = "calc", 
         h3("Prediction of Sepal.Width from iris dataset"),
         fluidRow(
-          valueBoxOutput("lm_predict"),
-          valueBoxOutput("rf_predict"),
-          valueBoxOutput("xgb_predict")
+          valueBoxOutput("lm_predict", width = 6),
+          valueBoxOutput("rf_predict", width = 6)
         ),
         fluidRow(
           box(
@@ -102,11 +99,6 @@ server <- function(input, output, session) {
   output$rf_predict <- renderValueBox({
     pred <- round(predict(rf_iris, novo_dado()), 2)
     valueBox(pred, "Random Forest", color = "orange")
-  })
-  
-  output$xgb_predict <- renderValueBox({
-    pred <- round(predict(xgb_iris, novo_dado()), 2)
-    valueBox(pred, "XGBoost", color = "purple")
   })
   
   output$pca <- renderPlot({
